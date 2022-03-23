@@ -1,0 +1,26 @@
+{
+  "name": "rosemary-cliente",
+  "version": "0.0.1",
+  "description": "Projeto API Modulo 4 tatoo",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "start": "node ./src/server.js",
+    "import": "node ./src/logica/importando.js",
+    "dev": "nodemon ./src/server.js",
+    "database": "node ./src/database/create-and-populate.js"
+  },
+  "author": "Igor Campos",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.17.3",
+    "cors": "^2.8.5",
+    "sqlite3": "^4.2.0"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "nodemon": "^1.11.1",
+    "supertest": "^6.2.2"
+  }
+}
