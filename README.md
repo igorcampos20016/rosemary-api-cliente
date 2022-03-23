@@ -8,7 +8,7 @@ Abra o terminal (Linux/Mac) ou o PowerShell (Windows) e siga os passos abaixo.
 
 Clone o repositório em sua máquina
 
-git clone https://github.com/cinmcantu/EstudioTattooAPI.git
+git clone https://github.com/igorcampos20016/rosemary-api-cliente
 
 Acesse a pasta criada
 
