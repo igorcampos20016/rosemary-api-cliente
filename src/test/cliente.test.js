@@ -46,7 +46,7 @@ describe('POST /clientes', ()=>{
         // com o .send().
         return request(app).post('/cliente')
         .send({
-            "nome" : "Yan",
+            "nome" : "Yago",
             "idade" : "26",
             "genero" : "masculino",
             "cpf": "1233454343",
