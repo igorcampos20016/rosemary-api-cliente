@@ -26,7 +26,8 @@ const ADD_CLIENTE_DATA = `
 INSERT INTO CLIENTES (NOME,  IDADE, GENERO, CPF, AUTORIZACAO)
 VALUES 
     ('Roberto Oliveira', '25', 'Masculino','11987654265', 'Sim'),
-    ('Roberta Oliveira', '25', 'Feminino','11987654265', 'Sim');
+    ('Roberta Oliveira', '23', 'Feminino','11987654265', 'Sim');
+    ('Rafael Oliveira', '26', 'Feminino','11987654265', 'Sim');
 
  `
 
