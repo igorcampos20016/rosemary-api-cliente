@@ -27,16 +27,14 @@ INSERT INTO CLIENTES (NOME,  IDADE, GENERO, CPF, AUTORIZACAO)
 VALUES 
     ('Roberto Oliveira', '25', 'Masculino','11987654265', 'Sim'),
     ('Roberta Oliveira', '25', 'Feminino','11987654265', 'Sim');
-   
-    
-`
+
+ `
 
 function criaTabelaClt() {
     db.run(CLIENTE_SCHEMA, (error)=> {
        if (error) console.log("Erro ao criar tabela de cliente " + error.message);
     });
 }
-
 
 function populaTabelaClt() {
     db.run(ADD_CLIENTE_DATA, (error)=> {

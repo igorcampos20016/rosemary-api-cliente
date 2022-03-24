@@ -1,19 +1,66 @@
-// Model que cuida da criação do objeto da nossa entidade
-// validando as entradas
+import ClienteDAO from "../DAO/ClienteDAO.js";
+import ClienteSchema from "./schema/ClienteSchema.js";
 
 class Cliente{
-    constructor(nome, idade, genero, cpf, autorizacao){
-        this.nome = nome
-        this.idade = idade
-        this.genero = genero
-        this.cpf = cpf
-        this.autorizacao = autorizacao
-        
+    constructor(db){
+        this.dao = new ClienteDAO(db);
     }
 
-    
+    pegaTodosClientes = async ()=>{
+        try {
+            return await this.dao.pegaTodosClientes();
+        } catch (error) {
+            throw error;
+        }
+    }
 
+    pegaUmCliente = async (id)=>{
+        try {
+            await this._verificaCliente(id);
 
+            return await this.dao.pegaUmCliente(id);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    insereCliente = async (portfolio)=>{
+        try{
+            const novoCliente = new ClienteSchema(Cliente.nome, Cliente.idade, Cliente.genero, Cliente.cpf, Cliente.clienteid)
+            return await this.dao.inserePortfolio(novoPortfolio);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    deletaCliete = async (id)=>{
+        try{
+            await this._verificaCliente(id);
+
+            return await this.dao.deletaCliente(id);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    atualizaCliente = async (id, cliente)=>{
+        try {
+            await this._verificaCliente(id);
+
+            const clietneAtualizado = new ClienteSchema(Cliente.nome, Cliente.idade, Cliente.genero, Cliente.cpf, Cliente.clienteid)
+
+            return await this.dao.atualizaCliente(id, clietneAtualizado);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    _verificaCliente = async (id)=>{
+        const resposta = await this.dao.pegaUmCliente(id);
+        if(resposta.length === 0){
+            throw new Error(`Cliente de id ${id} não existe`);
+        }
+    }
 }
 
-export default Cliente
+export default Cliente;,

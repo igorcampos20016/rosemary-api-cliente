@@ -7,29 +7,28 @@ const clienteController = (app, bd)=>{
     app.get('/cliente', (req, res)=>{
         clienteDAO.pegaTodosClientes()
         .then((resposta)=>{
-            res.json(resposta)
+            res.status(200).json(resposta)
         })
         .catch((erro)=>{
-            res.json(erro)
+            res.status(400).json(erro)
         })
     })
 
-    app.get('/cliente/genero/:genero', (req, res)=>{
+    app.get('/cliente/cpf/cpf', async (req, res) => {
         // Pegando parametro que sera utilizado para o filtro
-        const email = req.params.email
+        const cpf = req.params.cpf
 
-        // Pesquisa o usuario no banco de dados
-        clienteDAO.pegaUmCliente(email)
+        // Pesquisa o cliente no banco de dados
+        clienteDAO.pegaUmCliente(Cliente)
         .then((resposta)=>{
-            res.json(resposta)
+            res.status(200).json(resposta)
         })
         .catch((erro)=>{
-            res.json(erro)
+            res.status(400).json(erro)
         })
     })
 
-    app.post('/cliente',(req, res)=>{
-        // Recebe o corpo da requisição
+    app.post('/cliente', async (req, res) => {        // Recebe o corpo da requisição
         const body = req.body
 
         // Como temos validações na nossa model, usamos o try/catch
@@ -42,10 +41,10 @@ const clienteController = (app, bd)=>{
             // insere a instância do cliente no banco de dados
             clienteDAO.insereCliente(novoCliente)
             .then((resposta)=>{
-                res.json(resposta)
+                res.status(200).json(resposta)
             })
             .catch((erro)=>{
-                res.json(erro)
+                res.status(400).json(erro)
             })
 
         } catch (error) {
@@ -57,7 +56,7 @@ const clienteController = (app, bd)=>{
         }  
     })
 
-    app.delete('/cliente/id/:id', (req, res)=>{
+    app.delete('/cliente', async (req, res) => {
         // Pegando parametro que sera utilizado para o filtro
         const id = req.params.id
 
@@ -67,11 +66,11 @@ const clienteController = (app, bd)=>{
             res.json(resposta)
         })
         .catch((erro)=>{
-            res.json(erro)
+            res.json(resposta)
         })
     })
 
-    app.put('/cliente/id/:id', (req, res)=>{
+    app.put('/cliente/id/id', async (req, res) => {
         // Pegando parametro que sera utilizado para o filtro
         const id = req.params.id
 
@@ -86,10 +85,10 @@ const clienteController = (app, bd)=>{
             // Atualiza o usuario no banco de dados
             clienteDAO.atualizaCliente(id, clienteAtualizado)
             .then((resposta)=>{
-                res.json(resposta)
+                res.status.json(resposta)
             })
             .catch((erro)=>{
-                res.json(erro)
+                res.status.json(resposta)
             })
 
         } catch (error) {

@@ -24,3 +24,13 @@ npm run start
 
 A porta padrão é a 3000. Caso queira alterá-la, procure a linha const port = process.env.PORT || 3000 no arquivo /server.js e altere o número 3003 para sua porta de preferência.
 
+Resumo das rotas
+Segue abaixo um resumo das rotas da API. Em seguida terão mais informações sobre cada uma delas.
+
+GET: URL_BASE/cliente
+GET: URL_BASE/cliente/{id}
+GET: URL_BASE/cliente/tag/{tag}
+POST: URL_BASE/cliente
+PUT: URL_BASE/cliente{id}
+DELETE: URL_BASE/clieten/{id}
+Retornando os Portifólios

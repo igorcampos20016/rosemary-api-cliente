@@ -24,7 +24,7 @@ class ClienteDAO{
                     })
                 }else{
                     resolve({
-                        "clientes": rows,
+                        "Cliente": rows,
                         "erro": false
                     })
                 }
@@ -125,4 +125,4 @@ class ClienteDAO{
 
 }
 
-export default ClienteDAO
+export default ClienteDAO;
