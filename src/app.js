@@ -28,4 +28,4 @@ clienteController(app, database)
 
 
 // exporta o app para ser usado em outros arquivos
-export default app
+export default 
