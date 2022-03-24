@@ -13,4 +13,4 @@ const generalMiddleware = (app)=>{
 
 }
 
-export default generalMiddleware
+export default generalMiddleware;
