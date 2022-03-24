@@ -1,6 +1,6 @@
 // Importa o app para ser utilizado.
 // Todas funções que tem dentro do arquivo
-// serão rodadas
+// serão rodadas no servidor
 import app from './app.js'
 
 // Escolhendo a porta
