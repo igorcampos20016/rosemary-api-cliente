@@ -102,4 +102,4 @@ const clienteController = (app, bd)=>{
 
 }
 
-export default clienteController
+export default clienteController;
