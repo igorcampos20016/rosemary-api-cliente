@@ -1,6 +1,6 @@
 {
   "name": "rosemary-cliente",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Projeto API Modulo 4 tatoo",
   "main": "index.js",
   "scripts": {
