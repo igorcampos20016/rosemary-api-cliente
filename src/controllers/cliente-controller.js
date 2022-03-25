@@ -14,10 +14,9 @@ const clienteController = (app, bd)=>{
         })
     })
 
-    app.get('/cliente/cpf/cpf', async (req, res) => {
-        // Pegando parametro que sera utilizado para o filtro
+    app.get('/cliente/cpf/:cpf', (req, res)=>{
+        
         const cpf = req.params.cpf
-
         // Pesquisa o cliente no banco de dados
         clienteDAO.pegaUmCliente(Cliente)
         .then((resposta)=>{
@@ -28,20 +27,19 @@ const clienteController = (app, bd)=>{
         })
     })
 
-    app.post('/cliente', async (req, res) => {        // Recebe o corpo da requisição
+    app.post('/cliente',(req, res)=>{
+      
         const body = req.body
 
-        // Como temos validações na nossa model, usamos o try/catch
-        // para pegar esse erro e enviar como mensagem para nosso cliente
+        
         try {
-            // cria uma instancia de Cliente com validação dos dados
-            // apartir do corpo que foi recebido
-            const novoCliente = new Cliente(body.nome, body.idade, body.genero, body.cpf , body.autorizacao)
+           
+            const novoCliente = new Cliente(body.NOME, body.IDADE, body.GENERO, body.CPF, body.AUTORIZACAO)
 
-            // insere a instância do cliente no banco de dados
+          
             clienteDAO.insereCliente(novoCliente)
             .then((resposta)=>{
-                res.status(200).json(resposta)
+                res.status(201).json(resposta)
             })
             .catch((erro)=>{
                 res.status(400).json(erro)
@@ -49,48 +47,26 @@ const clienteController = (app, bd)=>{
 
         } catch (error) {
             // Envia o erro, caso exista
-            res.json({
-                "msg": error.message,
+            res.status(400).json({
+                "msg": error,
                 "erro": true
             })
         }  
     })
-
-    app.delete('/cliente', async (req, res) => {
-        // Pegando parametro que sera utilizado para o filtro
-        const id = req.params.id
-
-        // remove o cliente do banco de dados
-        clienteDAO.deletaCliente(id)
-        .then((resposta)=>{
-            res.json(resposta)
-        })
-        .catch((erro)=>{
-            res.json(resposta)
-        })
-    })
-
-    app.put('/cliente/id/id', async (req, res) => {
-        // Pegando parametro que sera utilizado para o filtro
-        const id = req.params.id
-
-        // Pegando o corpo da requisição com as informações
-        // que serão atualizados
-        const body = req.body
+    app.put('/cliente/id/:ID', async (req, res) => {
+            const ID = req.params.ID
+            const body = req.body
 
         try {
-            // utiliza a classe para validação dos dados recebidos
-            const clienteAtualizado = new Cliente(body.nome, body.idade, body.genero, body.cpf , body.autorizacao)
-
-            // Atualiza o usuario no banco de dados
-            clienteDAO.atualizaCliente(id, clienteAtualizado)
+         const clienteAtualizado = new Cliente(body.NOME, body.IDADE, body.GENERO, body.CPF, body.AUTORIZACAO)
+            clienteDAO.atualizaCliente(ID, clienteAtualizado)
             .then((resposta)=>{
-                res.status.json(resposta)
+                res.status(200).json(resposta)
             })
             .catch((erro)=>{
-                res.status.json(resposta)
+                res.status(400).
+                json(erro)
             })
-
         } catch (error) {
             // Envia o erro, caso exista
             res.json({
@@ -100,6 +76,20 @@ const clienteController = (app, bd)=>{
         }
     })
 
+    app.delete('/cliente/id/:ID', async(req, res) =>{
+        const ID = req.params.ID;
+        try{
+            const deletaCliente = await clienteDAO.deletaCliente(ID)
+            console.log(deletaCliente);
+            res.status(200).json(deletaCliente)
+        }
+        catch(error){
+            res.status(400).json(error.message)
+    
+        }
+    })
+
+
 }
 
-export default clienteController;
+export default clienteController

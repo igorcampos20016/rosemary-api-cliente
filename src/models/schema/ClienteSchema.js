@@ -1,11 +1,11 @@
 class ClienteSchema{
-    constructor(nome , idade , genero, cpf , autorizacao, clienteid){
+    constructor(id, nome , idade , genero, cpf , autorizacao, clienteid){
         this.nome = nome;
         this.idade = idade;
-        this.cpf = cpf
+        this.cpf = cpf;
         this.autorizacao= autorizacao;
         this.clienteid = clienteid;
     }
 }
 
-export default ClienteSchema;
+export default ClienteSchema

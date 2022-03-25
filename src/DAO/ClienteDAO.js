@@ -1,21 +1,14 @@
-// A classe DAO é responsável por acessar nosso banco de dados
-// Cada arquivo DAO é responsável por uma entidade
-
 class ClienteDAO{
 
     constructor(db){
         this.db = db
     }
 
-    // Metodo responsável pelo acesso aos bancos de dados
-    // cada metodo será responsável por uma query de acordo com
-    // o que ele deve retornar
+    
     pegaTodosClientes = ()=>{
-        // Como estamos tratando de acesso a banco de dados, o processo é
-        // assíncrono, por isso precisamos trabalhar com promises.
-        // O método ira retornar a promise, que será excutada (com .then e .catch)
+        
         // no controller
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject) => {
             this.db.all('SELECT * FROM CLIENTES', (error, rows)=>{
                 if(error){
                     reject({
@@ -24,7 +17,7 @@ class ClienteDAO{
                     })
                 }else{
                     resolve({
-                        "Cliente": rows,
+                        "clientes": rows,
                         "erro": false
                     })
                 }
@@ -32,10 +25,10 @@ class ClienteDAO{
         })
     }
 
-    pegaUmCliente = (cliente)=>{
+    pegaUmCliente = (cpf)=>{
         return new Promise((resolve, reject)=>{
-            this.db.all('SELECT * FROM CLIENTES WHERE EMAIL = ?',
-            genero,
+            this.db.all('SELECT * FROM CLIENTES WHERE CPF = ?',
+            cpf,
             (error, rows)=>{
                 if(error){
                     reject({
@@ -56,22 +49,18 @@ class ClienteDAO{
     insereCliente = (novoCliente) =>{
 
         return new Promise((resolve, reject)=>{
-            // Query com ? para evitar SQL Injection
-            // NUNCA DEVEMOS USAR COM TEMPLATE ST/RING
-            // Nós inserimos os dados a serem substituidos depois da query
-            // Ou separado por vírgula (QUERY, a,b,c, callback)
-            // Ou em um array (QUERY, [a,b,c] , callback)
-            this.db.run("INSERT INTO CLIENTES(NOME, IDADE, GENERO, CPF, AUTORIZACAO) VALUES (?, ?, ?)",
-                novoCliente.nome, novoCliente.idade, novoCliente.genero, novo.Cliente.cpf, novo.Cliente.autorizacao,
+            
+            this.db.run("INSERT INTO CLIENTES (NOME, IDADE, GENERO, CPF, AUTORIZACAO) VALUES (?, ?, ?, ?, ?)",
+                novoCliente.NOME, novoCliente.IDADE, novoCliente.GENERO, novoCliente.CPF, novoCliente.AUTORIZACAO,
                 (error)=>{
                 if(error){
                     reject({
-                        "mensagem": error.message,
+                        "mensagem": error,
                         "erro": true
                     })
                 }else{
                     resolve({
-                        "mensagem": `Cliente ${novoCliente.nome} inserido com sucesso`,
+                        "mensagem": `Cliente ${novoCliente.NOME} inserido com sucesso`,
                         "cliente": novoCliente,
                         "erro": false
                     })
@@ -81,19 +70,20 @@ class ClienteDAO{
 
     }
 
-    deletaCliente = (id)=>{
+    deletaCliente = (ID)=>{
         return new Promise((resolve, reject)=>{
-            this.db.run('DELETE FROM CLIENTE WHERE ID = ?',
-            id,
+            this.db.run('DELETE FROM CLIENTES WHERE ID = ?',
+        ID,
             (error)=>{
                 if(error){
+                    console.log(error);
                     reject({
-                        "mensagem": error.message,
+                        "mensagem": error,
                         "erro": true
                     })
                 }else{
                     resolve({
-                        "cliente": `Cliente de id ${id} deletado com sucesso`,
+                        "cliente": `Cliente de id ${ID} deletado com sucesso`,
                         "erro": false
                     })
                 }
@@ -101,20 +91,21 @@ class ClienteDAO{
         })
     }
 
-    atualizaCliente = (id, cliente)=>{
+    atualizaCliente = (ID, cliente)=>{
         return new Promise((resolve, reject)=>{
-            this.db.run('UPDATE CLIENTE SET NOME = ?, EMAIL = ?, SENHA = ? WHERE ID = ?',
-            cliente.nome, cliente.email, cliente.senha,
-            id,
+            this.db.run("UPDATE CLIENTES SET NOME = ?, IDADE = ?, GENERO = ?, CPF = ?, AUTORIZACAO = ? WHERE ID = ?",
+            cliente.NOME, cliente.IDADE, cliente.GENERO, cliente.CPF, cliente.AUTORIZACAO,
+            ID,
             (error)=>{
                 if(error){
+                    console.log(error);
                     reject({
-                        "mensagem": error.message,
+                        "mensagem": error,
                         "erro": true
                     })
                 }else{
                     resolve({
-                        "mensagem": `Cliente de id ${id} atualizado com sucesso`,
+                        "mensagem": `Cliente de id ${ID} atualizado com sucesso`,
                         "cliente": cliente,
                         "erro": false
                     })
@@ -125,4 +116,4 @@ class ClienteDAO{
 
 }
 
-export default ClienteDAO;
+export default ClienteDAO
