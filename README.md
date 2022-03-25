@@ -141,4 +141,4 @@ DELETE: URL_BASE/cliente/{id} Resposta:
 Testes
 Foi implementado um arquivo de testes para checar o funcionamento correto das rotas da API. Para isso foi utilizado a biblioteca Supertest com o framework Jest
 
-npm run test
+npm run test.
